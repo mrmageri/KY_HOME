@@ -32,6 +32,7 @@ interface Value {
  * Числовое значение с сохранением целочисленности.
  */
 final class VNum implements Value {
+    private static final long ZERO_LONG = 0L;
     /** TOML-представление. */
     final String toml;
     /** Признак целого. */
@@ -61,10 +62,10 @@ final class VNum implements Value {
      * @return обёртка над вещественным
      */
     static VNum ofDouble(double v) {
-        return new VNum(Double.toString(v).replace('E', 'e'), false, 0L, v);
+        return new VNum(Double.toString(v).replace('E', 'e'), false, ZERO_LONG, v);
     }
     static VNum ofNormalized(String normalizedToml, double dval) {
-        return new VNum(normalizedToml, false, 0L, dval);
+        return new VNum(normalizedToml, false, ZERO_LONG, dval);
     }
 
     /**

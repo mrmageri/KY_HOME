@@ -8,6 +8,7 @@ final class TomlWriter {
     private static final char QUOTE = '"';
     private static final int MIN_CONTROL_CODE = 0x20;
     private static final int DELETE_CODE = 0x7F;
+    private static final int START_INDEX = 0;
 
     private TomlWriter() {
     }
@@ -66,7 +67,7 @@ final class TomlWriter {
     private static String tomlString(String s) {
         StringBuilder sb = new StringBuilder();
         sb.append(QUOTE);
-        for (int i = 0; i < s.length(); i++) {
+        for (int i = START_INDEX; i < s.length(); i++) {
             appendChar(sb, s.charAt(i));
         }
         sb.append(QUOTE);

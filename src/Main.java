@@ -51,6 +51,7 @@ public final class Main {
 final class Cli {
     private static final int ONE = 1;
     private static final int OPTION_TOKENS = 2;
+    private static final int EXIT_OK = 0;
 
     final Path input;
     final Path output;
@@ -79,7 +80,7 @@ final class Cli {
                 i += OPTION_TOKENS;
             } else if (isHelpKey(a)) {
                 printUsage();
-                System.exit(0);
+                System.exit(EXIT_OK);
             } else {
                 throw new UsageException("неизвестный аргумент: " + a);
             }

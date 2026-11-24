@@ -2,6 +2,8 @@ public final class ConfigToTomlTest {
 
     private static int passed = 0;
     private static int failed = 0;
+    private static final int ZERO = 0;
+    private static final int EXIT_ERROR = 1;
 
     public static void main(String[] args) {
         runBasics();
@@ -89,8 +91,8 @@ public final class ConfigToTomlTest {
 
     private static void report() {
         System.out.println("Пройдено: " + passed + ", провалено: " + failed);
-        if (failed > 0) {
-            System.exit(1);
+        if (failed > ZERO) {
+            System.exit(EXIT_ERROR );
         }
     }
 

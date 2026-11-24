@@ -53,6 +53,8 @@ final class Lexer {
     private static final int ZERO = 0;
     private static final int ONE = 1;
     private static final int NO_PART = -1;
+    private static final int START_LINE = 1;
+    private static final int START_COL = 1;
 
     private final String src;
     private int pos;
@@ -283,7 +285,7 @@ final class Lexer {
         char ch = src.charAt(pos++);
         if (ch == '\n') {
             line++;
-            col = 1;
+            col = START_COL;
         } else {
             col++;
         }
