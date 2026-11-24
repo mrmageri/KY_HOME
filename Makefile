@@ -9,7 +9,7 @@ MAIN     := Main
 TESTS    := ConfigToTomlTest
 
 SRC      := $(wildcard $(SRC_DIR)/*.java)
-TEST     := $(wildcard $(TEST_DIR)/*.java)
+TEST := $(wildcard tests/*.java)
 
 IN       ?= examples/web-server.cfg
 OUTFILE  ?= web-server.toml
