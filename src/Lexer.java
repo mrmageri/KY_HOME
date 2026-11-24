@@ -58,8 +58,8 @@ final class Lexer {
 
     private final String src;
     private int pos;
-    private int line = 1;
-    private int col = 1;
+    private int line = START_LINE;
+    private int col = START_COL;
 
     /**
      * @param source исходный текст
