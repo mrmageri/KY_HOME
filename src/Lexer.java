@@ -5,6 +5,7 @@ import java.util.List;
  * Виды лексем учебного конфигурационного языка.
  */
 enum Kind {
+    CARET,
     NUM, STR, NAME,
     DICT_OPEN, RBRACK, LBRACE, RBRACE,
     COLON, COMMA, EQ,
@@ -86,6 +87,12 @@ final class Lexer {
 
     private Token readToken() throws ConfigException {
         char ch = src.charAt(pos);
+        if (ch == '^') {
+            int startLine = line;
+            int startCol = col;
+            advance();
+            return new Token(Kind.CARET, "^", startLine, startCol);
+        }
         if (ch == 'q' && nextIsOpenParen()) {
             return readString();
         }

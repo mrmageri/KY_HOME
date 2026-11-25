@@ -102,7 +102,7 @@ final class Parser {
             case NUM:       return numberValue(next());
             case STR:       return new VStr(next().text);
             case NAME:      return constantValue(next());
-            case LBRACE:    return parseExpression();
+            case CARET: return parseExpression();
             case DICT_OPEN: return parseNestedDict(allowDict, t);
             default:        throw err("ожидалось значение, получено " + t.describe(), t);
         }
@@ -127,14 +127,13 @@ final class Parser {
     private Value numberValue(Token t) throws ConfigException {
         return NumberLiteral.parse(t.text, t);
     }
-
     private Value parseExpression() throws ConfigException {
-        Token open = expect(Kind.LBRACE, "ожидалось '{'");
+        expect(Kind.CARET, "ожидалось '^' перед выражением");
+        Token open = expect(Kind.LBRACE, "ожидалось '{' после '^'");
         String op = readOperator(open);
         List<Value> args = readOperands(open);
         return Evaluator.evaluate(op, args, open);
     }
-
     private String readOperator(Token open) throws ConfigException {
         Token t = next();
         String op = operatorName(t);

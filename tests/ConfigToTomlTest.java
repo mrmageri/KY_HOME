@@ -58,7 +58,7 @@ public final class ConfigToTomlTest {
                 "var a = 10\nvar b = 3\n$[\n"
                         + "  s : {+ a b},\n  d : {- a b},\n  m : {* a b},\n"
                         + "  q_one : {/ a 5},\n  q_two : {/ a b},\n  c : {chr 65},\n"
-                        + "  p : {pow 2 10},\n  n : {* {+ a b} 2},\n  neg : {- 0 5}\n]",
+                        + "  p : ^{pow 2 10},\n  n : ^{* ^{+ a b} 2},\n  neg : ^{- 0 5}\n]",
                 "s = 13\nd = 7\nm = 30\nq_one = 2\nq_two = 3.3333333333333335\n"
                         + "c = \"A\"\np = 1024\nn = 26\nneg = -5\n");
         eq("chr юникод",
