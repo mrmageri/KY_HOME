@@ -128,11 +128,22 @@ final class Parser {
         return NumberLiteral.parse(t.text, t);
     }
     private Value parseExpression() throws ConfigException {
-        expect(Kind.CARET, "ожидалось '^' перед выражением");
+        Token caret = expect(Kind.CARET, "ожидалось '^' перед выражением");
         Token open = expect(Kind.LBRACE, "ожидалось '{' после '^'");
+        if (isSingleNameReference(open)) {
+            Token name = next();
+            expect(Kind.RBRACE, "ожидалось '}' после имени константы");
+            return constantValue(name);
+        }
         String op = readOperator(open);
         List<Value> args = readOperands(open);
-        return Evaluator.evaluate(op, args, open);
+        return Evaluator.evaluate(op, args, caret);
+    }
+    private boolean isSingleNameReference(Token open) {
+        int afterName = pos + 1;
+        return peek().kind == Kind.NAME
+                && afterName < tokens.size()
+                && tokens.get(afterName).kind == Kind.RBRACE;
     }
     private String readOperator(Token open) throws ConfigException {
         Token t = next();
